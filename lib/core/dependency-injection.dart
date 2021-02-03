@@ -14,7 +14,7 @@ final sl = GetIt.instance;
 void init() {
   //todo: Dio Cache duration
   sl.registerLazySingleton(
-    () => buildCacheOptions(Duration(days: 1), forceRefresh: true),
+    () => buildCacheOptions(Duration(days: 0), forceRefresh: true),
   );
   //todo: Dio Cache Config
   sl.registerLazySingleton(
