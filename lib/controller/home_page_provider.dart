@@ -80,6 +80,8 @@ class HomeProvider extends ChangeNotifier {
   Future<void> getNews(String section, int time) async {
     setLoadingValue(true);
     try {
+      searchList = [];
+      results = [];
       data = await sl<NyTimesMostPopularRepo>().fetchNews(section, time);
       if (data != null) {
         data.results.sort((a, b) => a.publishedDate.compareTo(b.publishedDate));
