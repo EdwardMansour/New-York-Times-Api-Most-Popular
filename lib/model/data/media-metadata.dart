@@ -28,5 +28,10 @@ class MediaMetadata extends Equatable {
       };
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [
+        url,
+        format,
+        height,
+        width,
+      ];
 }

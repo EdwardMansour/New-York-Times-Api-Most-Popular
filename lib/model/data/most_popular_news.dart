@@ -32,5 +32,10 @@ class MostPopularData extends Equatable {
       };
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [
+        status,
+        copyright,
+        numResults,
+        results,
+      ];
 }

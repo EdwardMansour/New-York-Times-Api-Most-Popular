@@ -41,9 +41,9 @@ class NewsItemWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                //todo: spacing
+                //! spacing
                 spacing(null, width * 0.05),
-                //Todo: image
+                //! image
                 Expanded(
                   flex: 1,
                   child: ClipRRect(
@@ -58,7 +58,7 @@ class NewsItemWidget extends StatelessWidget {
                           ),
                   ),
                 ),
-                //todo: column on texts and date
+                //! column on texts and date
                 Expanded(
                   flex: 5,
                   child: Padding(
@@ -66,7 +66,7 @@ class NewsItemWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        //todo: spacing
+                        //! spacing
                         spacing(height * 0.1, null),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,23 +84,23 @@ class NewsItemWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        //todo: spacinge
+                        //! spacinge
                         spacing(height * 0.1, null),
-                        // todo: byLine text
+                        // ! byLine text
                         Text(
                           byLine,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
                         ),
-                        //todo: spacing
+                        //! spacing
                         spacing(height * 0.05, null),
-                        //todo: section and date
+                        //! section and date
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            //todo: section name
+                            //! section name
                             Expanded(
                               child: Text(
                                 section,
@@ -109,7 +109,7 @@ class NewsItemWidget extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
-                            //todo: calendar and date
+                            //! calendar and date
                             Expanded(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -138,7 +138,7 @@ class NewsItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // todo: arrow of showing details
+                //! arrow of showing details
                 Expanded(
                   flex: 1,
                   child: Padding(

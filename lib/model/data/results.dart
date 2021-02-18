@@ -104,5 +104,28 @@ class Result extends Equatable {
       };
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [
+        uri,
+        url,
+        id,
+        assetId,
+        source,
+        publishedDate,
+        updated,
+        section,
+        subsection,
+        nytdsection,
+        adxKeywords,
+        column,
+        byline,
+        type,
+        title,
+        resultAbstract,
+        desFacet,
+        orgFacet,
+        perFacet,
+        geoFacet,
+        media,
+        etaId,
+      ];
 }

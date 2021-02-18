@@ -33,7 +33,6 @@ class DioConnectivityRequestRetrier {
         }
       },
     );
-
     return responseCompleter.future;
   }
 }

@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ny_times/core/dependency-injection.dart';
 import 'package:ny_times/model/data/most_popular_news.dart';
 import 'package:ny_times/model/data/results.dart';
 import 'package:ny_times/model/repositories/ny_times_most_popular_repo.dart';
 
 class HomeProvider extends ChangeNotifier {
-  //todo: initialise variables
+  final NyTimesMostPopularRepo repo;
+
+  HomeProvider({
+    @required this.repo,
+  });
+
+  //! initialise variables
   //! loading variable
   bool isLoading = false;
   MostPopularData data;
@@ -22,32 +27,39 @@ class HomeProvider extends ChangeNotifier {
     'Monthly',
   ];
 
-  //todo: set loading value
+  //! set loading value
   setLoadingValue(bool value) {
     isLoading = value;
     notifyListeners();
   }
 
-  //todo: set opended value
+  //! set opended value
   setIsOpenedValue(bool value, int index) {
     openSectionBellow = value;
     indexResult = index;
     notifyListeners();
   }
 
-  //todo: set error value
+  //! set opended value
+  setResuts(List<Result> r) {
+    results = r;
+    notifyListeners();
+  }
+
+  //! set error value
   setErrorMessage(String value) {
     errorMessage = value;
     notifyListeners();
   }
 
-  //todo: set loading value
+  //! set loading value
   setSearchIsClickedOrNot(bool value) {
     onSearchClick = value;
+    searchList = [];
     notifyListeners();
   }
 
-  //todo: set date value
+  //! set date value
   setDateValue(String value) {
     datePicker = chooseDate.indexWhere((element) => element == value);
     notifyListeners();
@@ -61,26 +73,32 @@ class HomeProvider extends ChangeNotifier {
     );
   }
 
-  //todo: search function
+  //! Search function
   setChangeTypingWords(String value) {
-    RegExp exp = new RegExp(
-      "\\b" + value + "\\b",
-      caseSensitive: false,
-    );
-    searchList = results.where(
-      (element) {
-        bool containe = exp.hasMatch(element.title);
-        return containe;
-      },
-    ).toList();
+    if (value != '') {
+      RegExp exp = new RegExp(
+        r"(?<![\w\d])" + value + "(?![\w\d])",
+        caseSensitive: false,
+        multiLine: false,
+      );
+      searchList = results
+          .where(
+            (element) => exp.hasMatch(element.title),
+          )
+          .toList();
+    } else
+      searchList = results;
+
     notifyListeners();
   }
 
-  //todo: get news list
+  //! get news list
   Future<void> getNews(String section, int time) async {
     setLoadingValue(true);
     try {
-      data = await sl<NyTimesMostPopularRepo>().fetchNews(section, time);
+      searchList = [];
+      results = [];
+      data = await repo.fetchNews(section, time);
       if (data != null) {
         data.results.sort((a, b) => a.publishedDate.compareTo(b.publishedDate));
         results = data.results;

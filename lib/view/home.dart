@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => getMethods(context));
+    // WidgetsBinding.instance.addPostFrameCallback((_) => getMethods(context));
   }
 
   getMethods(context) {
@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
     return Consumer<HomeProvider>(builder: (context, prov, child) {
       return Scaffold(
         backgroundColor: Colors.white,
-        //todo : the drawer => empty
+        //! the drawer => empty
         drawer: Drawer(
             child: Container(
           color: Colors.white,
@@ -41,10 +41,11 @@ class _HomeState extends State<Home> {
             ),
         appBar: AppBar(
           backgroundColor: Colors.greenAccent,
-          //todo: title text
+          //!title text
           title: prov.onSearchClick
               ? Container(
                   child: TextFormField(
+                    key: Key('search textField'),
                     onChanged: (value) {
                       prov.setChangeTypingWords(value);
                     },
@@ -67,8 +68,9 @@ class _HomeState extends State<Home> {
                   overflow: TextOverflow.fade,
                 ),
           actions: [
-            //todo: search icon
+            //! search icon
             GestureDetector(
+              key: Key('search button or close'),
               child: Padding(
                 padding: EdgeInsets.only(right: 19.0),
                 child: Icon(
@@ -82,9 +84,11 @@ class _HomeState extends State<Home> {
                 searchTextCntrlr.text = '';
               },
             ),
-            // todo: more icon that I want to use for changing the date
+            //! more icon that I want to use for changing the date
             GestureDetector(
+              key: Key('menu button'),
               child: PopupMenuButton<String>(
+                key: Key('pop up menu button'),
                 captureInheritedThemes: true,
                 icon: Icon(
                   Icons.more_vert,
@@ -99,11 +103,8 @@ class _HomeState extends State<Home> {
                     );
                   }).toList();
                 },
-                onCanceled: () {
-                  print('You have not chossed anything');
-                },
                 onSelected: (value) {
-                  //todo : Set the value of date that I want to choose
+                  //! Set the value of date that I want to choose
                   prov.setDateValue(value);
                 },
               ),
@@ -114,23 +115,26 @@ class _HomeState extends State<Home> {
           // onTap: () => _searchTextFocus.unfocus(),
           child: Center(
             child: prov.results.isEmpty || prov.isLoading
-                // todo: loading view
+                //! loading view
                 ? prov.errorMessage != null
                     ? Text(
                         prov.errorMessage,
                       )
                     : CircularProgressIndicator(
+                        key: Key('loading widget'),
                         backgroundColor: Colors.greenAccent,
                       )
                 : prov.results.isNotEmpty
-                    //todo: list of news
+                    //! list of news
                     ? ListView.builder(
+                        key: Key('list of news'),
                         itemCount: prov.searchList.isEmpty
                             ? prov.data.results.length
                             : prov.searchList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          //todo: widget of the item
+                          //! widget of the item
                           return NewsItemWidget(
+                            // key: Key('item$index'),
                             index: index,
                             openSectionBellow: prov.indexResult != null &&
                                 index == prov.indexResult &&
@@ -156,8 +160,13 @@ class _HomeState extends State<Home> {
                                     ? null
                                     : prov.results[index].media[0]
                                         .mediaMetadata[0].url
-                                : prov.searchList[index].media[0]
-                                    .mediaMetadata[0].url,
+                                : prov.searchList[index].media.isNotEmpty
+                                    ? prov
+                                        .searchList[index]
+                                        .media[0] //!
+                                        .mediaMetadata[0]
+                                        .url
+                                    : null,
                             section: prov.searchList.isEmpty
                                 ? prov.results[index].section
                                 : prov.searchList[index].section,
