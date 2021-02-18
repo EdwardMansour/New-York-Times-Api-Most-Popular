@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ny_times/controller/home_page_provider.dart';
 import 'package:ny_times/core/dependency-injection.dart';
 import 'package:ny_times/main.dart';
-import 'package:ny_times/model/data/results.dart';
-import 'package:ny_times/view/sub_widgets/news_item_widget.dart';
 
 void main() async {
   init();
-  testWidgets('Button open and close search', (WidgetTester tester) async {
+  testWidgets('Home page testing widgets', (WidgetTester tester) async {
     //! find all widget needed
     final searchTextField = find.byKey(ValueKey('search textField'));
     final searchButton = find.byKey(ValueKey('search button or close'));
