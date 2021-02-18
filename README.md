@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 This app is using New York Times API to fetch some data into UI
 
-to get this app into your project open your IDE go to the terminal and type clone +Repo-URL when the download is done make another command called 'flutter run' to run your project If you need to test performance and UI I'm using tool called DevOps in visual studio code.
+to get this app into your project open your IDE go to the terminal and type "git clone https://github.com/EdwardMansour/New-York-Times-Api-Most-Popular.git" when the download is done make another command called 'flutter run' to run your project If you need to test performance and UI I'm using tool called DevOps in visual studio code.
 
 ### Unit test
 
